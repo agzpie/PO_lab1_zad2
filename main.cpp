@@ -95,19 +95,36 @@ class List {
 
         bool contains(int key) {
             if (firstElement == NULL) {
+               // cout << "doesn't contain key " << key << endl;
                 return false;
             }
             ListElement *node = firstElement;
             do {
                 if (node->getKey() == key) {
+               //     cout << "contains key " << key << endl;
                     return true;
                 }
                 node = node->getNext();
             } while (node != NULL);
+          //  cout << "doesn't contain key " << key << endl;
             return false;
         }
+
+        void doesItContain(int key) {
+            if (contains(key) == false) {
+                cout << "doesn't contain key " << key << endl;
+            }
+            else
+                cout << "contains key " << key << endl;
+        }
+
         void removeKey(int key) {
             if (firstElement == NULL) {
+                return;
+            }
+
+            if (this->contains(key) == false) {
+                cout << "the key " << key << " can't be removed" << endl;
                 return;
             }
 
@@ -160,9 +177,11 @@ class List {
             }
 
             ListElement *node = firstElement;
-            cout << "List = [ ";
+            cout << "List = [";
             do {
-                cout << node->getKey() << ", ";
+                cout << node->getKey();
+                if (node->getNext() != NULL)
+                    cout << ", ";
                 node = node->getNext();
             } while (node != NULL);
 
@@ -179,7 +198,7 @@ class List {
 int main() {
 
     List myList;
-
+/*
     myList.addToEnd(1);
     myList.addToEnd(2);
     myList.addToEnd(3);
@@ -209,6 +228,28 @@ int main() {
 
     cout << "adding to the beginning" << endl;
     myList.addToBeginning(1);
+    myList.printList();
+*/
+
+    myList.addToEnd(3);
+    myList.addToBeginning(2);
+    myList.printList();
+    myList.addToBeginning(1);
+    myList.addToEnd(4);
+    myList.printList();
+    myList.contains(3);
+    myList.doesItContain(3);
+    myList.contains(5);
+    myList.doesItContain(5);
+    myList.removeKey(3);
+    myList.printList();
+
+    myList.removeKey(5);
+    myList.printList();
+    myList.removeKey(1);
+    myList.printList();
+    myList.clearAll();
+    myList.addToEnd(0);
     myList.printList();
 
 
